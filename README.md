@@ -1,73 +1,99 @@
-# React + TypeScript + Vite
+# Balance — Agencia de Marketing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sitio web institucional de **Balance**, agencia de comunicación y marketing 
+para marcas y líderes. Landing page moderna con integración a Google Sheets 
+para gestión de leads y configuración dinámica.
 
-Currently, two official plugins are available:
+## 🚀 Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend:** React 19 + Vite + TypeScript
+- **Estilos:** Tailwind CSS v4
+- **Animaciones:** Framer Motion
+- **Backend/DB:** Google Apps Script + Google Sheets
+- **Deploy:** Netlify
 
-## React Compiler
+## 📁 Estructura
+src/
+├── assets/
+│   ├── images/        # Logos y fotos
+│   └── videos/        # Videos de portfolio y hero
+├── components/
+│   ├── layout/        # Header, Footer, Layout
+│   ├── sections/      # Hero, SobreNosotras, Servicios, Portfolio, Contacto
+│   └── ui/            # Componentes reutilizables
+├── hooks/
+│   └── useConfig.ts   # Hook para consumir config desde Google Sheets
+├── lib/
+│   ├── api.ts         # Funciones de comunicación con Apps Script
+│   └── types.ts       # Tipos TypeScript
+└── pages/
+└── Home.tsx       # Landing page principal
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚙️ Variables de entorno
 
-## Expanding the ESLint configuration
+Creá un archivo `.env.local` en la raíz con:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_APPS_SCRIPT_URL=https://script.google.com/macros/s/TU_URL/exec
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🗂️ Google Sheets
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+El proyecto usa Google Sheets como base de datos liviana con 4 tabs:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Tab | Función |
+|-----|---------|
+| `Leads` | Recibe los formularios de contacto |
+| `Config` | Configuración dinámica (links, textos, redes) |
+| `Servicios` | Lista de servicios (para futura integración dinámica) |
+| `Portfolio` | Casos de portfolio (para futura integración dinámica) |
+
+## 🛠️ Desarrollo local
+
+```bash
+# Instalar dependencias
+npm install
+
+# Servidor de desarrollo
+npm run dev
+
+# Build de producción
+npm run build
+
+# Preview del build
+npm run preview
 ```
+
+## 🌐 Deploy en Netlify
+
+1. Conectar el repositorio en [netlify.com](https://netlify.com)
+2. Build command: `npm run build`
+3. Publish directory: `dist`
+4. Agregar la variable de entorno `VITE_APPS_SCRIPT_URL` en el dashboard
+
+## 📦 Videos
+
+Los videos del portfolio deben estar en `src/assets/videos/` con estos nombres exactos:
+- `cruz-del-sur.mp4`
+- `grow.mp4`
+- `glow-pro.mp4`
+- `bocaditos.mp4`
+- `videoHeroRecortado.mp4`
+
+> Los videos no se suben al repositorio (están en `.gitignore`).
+> Deben agregarse manualmente en el servidor o via Netlify Large Media.
+
+## 🔒 Archivos excluidos del repo
+
+- `.env.local` — variables de entorno con URLs sensibles
+- `src/assets/videos/` — videos pesados
+- `node_modules/`
+
+## 👩‍💼 Cliente
+
+**Balance** — Comunicación y Marketing para marcas y líderes  
+Fundadoras: Pili (Dirección de Marketing & Estrategia) y Pachi (Dirección de Comunicación & Experiencia de marca)
+
+## 🧑‍💻 Desarrollado por
+
+[SCdev](https://scdev.com.ar/) — Desarrollo web profesional
