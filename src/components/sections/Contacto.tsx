@@ -181,12 +181,12 @@ export const Contacto = () => {
             </a>
 
             <a
-              href="#"
+              href="https://www.instagram.com/balance.marketing?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               aria-label="Instagram de Balance (@agenciabalance)"
               className="flex items-center gap-3 font-display text-sm text-white/70 hover:text-brand-violet transition-colors duration-200"
             >
               <InstagramIcon />
-              @agenciabalance
+              @balance.marketing
             </a>
 
             <a

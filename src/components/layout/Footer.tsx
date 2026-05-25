@@ -100,7 +100,7 @@ export const Footer = () => {
           {/* Social icons */}
           <div className="flex items-center gap-4">
             <a
-              href="#"
+              href="https://www.instagram.com/balance.marketing?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               aria-label="Instagram de Balance (próximamente)"
               className="text-brand-gray hover:text-brand-white transition-colors duration-200"
             >
