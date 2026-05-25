@@ -1,3 +1,5 @@
+import type { SiteConfig, ApiResponse } from './types';
+
 const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL as string;
 
 /**
@@ -42,5 +44,49 @@ export async function getConfig(): Promise<{
     return data;
   } catch {
     return null;
+  }
+}
+
+/**
+ * Obtiene y mapea la configuración completa del sitio como SiteConfig tipado.
+ * Wrapper sobre getConfig() que devuelve ApiResponse<SiteConfig>.
+ */
+export async function fetchSiteConfig(): Promise<ApiResponse<SiteConfig>> {
+  try {
+    const raw = await getConfig();
+
+    if (!raw) {
+      return { ok: false, error: 'No se pudo obtener la configuración' };
+    }
+
+    const config: SiteConfig = {
+      nombre:   raw.config['nombre']  ?? '',
+      slogan:   raw.config['slogan']  ?? '',
+      email:    raw.config['email']   ?? '',
+      telefono: raw.config['telefono'],
+      redesSociales: {
+        instagram: raw.config['instagram'],
+        linkedin:  raw.config['linkedin'],
+        twitter:   raw.config['twitter'],
+      },
+      servicios: raw.servicios.map(s => ({
+        id:          s['id']          ?? '',
+        titulo:      s['titulo']      ?? '',
+        descripcion: s['descripcion'] ?? '',
+        icono:       s['icono'],
+      })),
+      portfolio: raw.portfolio.map(p => ({
+        id:          p['id']          ?? '',
+        titulo:      p['titulo']      ?? '',
+        descripcion: p['descripcion'] ?? '',
+        imagen:      p['imagen'],
+        tags:        p['tags'] ? p['tags'].split(',').map(t => t.trim()) : undefined,
+        url:         p['url'],
+      })),
+    };
+
+    return { ok: true, data: config };
+  } catch {
+    return { ok: false, error: 'Error al cargar la configuración' };
   }
 }
