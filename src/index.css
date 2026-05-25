@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,900;1,9..40,400&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-brand-black:  #171616;
+  --color-brand-white:  #FFFFFF;
+  --color-brand-gray:   #E6E6E6;
+  --color-brand-violet: #4C4CE6;
+  --color-brand-green:  #ABC652;
+}
+
+/* ─── Utility classes ──────────────────────────────────────────── */
+@layer utilities {
+  .font-display {
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+  .font-script {
+    font-family: "Dancing Script", cursive;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ─── Reset base ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
