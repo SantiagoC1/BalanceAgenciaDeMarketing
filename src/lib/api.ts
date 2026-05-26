@@ -4,23 +4,22 @@ const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL as string;
 
 /**
  * Envía un lead al Apps Script.
- * Usa Content-Type: text/plain para evitar el CORS preflight
- * que Apps Script rechaza con application/json.
+ * Usa mode: 'no-cors' porque Apps Script no devuelve los headers
+ * CORS necesarios para leer la respuesta desde el navegador.
+ * Con no-cors la response es opaque — no se puede leer el body,
+ * pero si fetch no lanza un error de red el dato llegó al Sheet.
  */
-export async function submitLead(data: {
-  nombre:    string;
-  email:     string;
-  telefono?: string;
-  mensaje:   string;
-}): Promise<{ ok: boolean }> {
+export async function submitLead(data: Record<string, string>): Promise<{ ok: boolean }> {
   try {
-    const response = await fetch(APPS_SCRIPT_URL, {
+    await fetch(APPS_SCRIPT_URL, {
       method:  'POST',
       headers: { 'Content-Type': 'text/plain' },
       body:    JSON.stringify(data),
+      mode:    'no-cors',
     });
-    const result = await response.json() as { ok: boolean };
-    return { ok: result.ok === true };
+    // Con no-cors no podemos leer la respuesta, pero si no hubo
+    // error de red asumimos que Apps Script recibió el dato.
+    return { ok: true };
   } catch {
     return { ok: false };
   }

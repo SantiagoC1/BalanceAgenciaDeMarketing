@@ -238,6 +238,7 @@ export const Portfolio = () => {
       <section
         id="portfolio"
         className="bg-brand-white w-full scroll-mt-16 md:scroll-mt-20 py-24"
+        aria-label="Portfolio de trabajos"
         onMouseMove={handleMouseMove}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10">

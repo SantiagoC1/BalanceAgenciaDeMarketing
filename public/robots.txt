@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.somosbalance.com.ar/sitemap.xml

@@ -80,7 +80,7 @@ export const Servicios = () => {
   };
 
   return (
-    <section id="servicios" className="bg-brand-white py-24 px-6 scroll-mt-16 md:scroll-mt-20">
+    <section id="servicios" className="bg-brand-white py-24 px-6 scroll-mt-16 md:scroll-mt-20" aria-label="Nuestros servicios">
       <div className="max-w-6xl mx-auto">
 
         {/* ── Header ──────────────────────────────────────────────────── */}

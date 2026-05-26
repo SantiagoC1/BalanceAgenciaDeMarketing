@@ -57,7 +57,7 @@ const PILLS = [
 
 export const SobreNosotras = () => {
   return (
-    <section id="nosotras" className="bg-brand-black w-full scroll-mt-16 md:scroll-mt-20">
+    <section id="nosotras" className="bg-brand-black w-full scroll-mt-16 md:scroll-mt-20" aria-label="Sobre nosotras">
 
       {/* ── MOBILE: fotos circulares (< md) ──────────────────────────────── */}
       <div className="md:hidden flex flex-col items-center pt-16 pb-8 px-6 text-center">
@@ -255,20 +255,7 @@ export const SobreNosotras = () => {
           ))}
         </motion.div>
 
-        {/* CTA — manda a contacto (no hay página separada de nosotras) */}
-        <a
-          href="#contacto"
-          className="
-            inline-flex items-center gap-1.5
-            font-display font-medium text-sm
-            text-brand-violet
-            hover:underline underline-offset-4
-            transition-all duration-200
-          "
-        >
-          Conocé nuestra historia completa
-          <span aria-hidden="true">→</span>
-        </a>
+        
 
       </div>
     </section>

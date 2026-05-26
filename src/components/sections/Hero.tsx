@@ -29,7 +29,7 @@ const fadeUp: Variants = {
 
 export const Hero = () => {
   return (
-    <section className="bg-brand-white w-full relative overflow-hidden">
+    <section className="bg-brand-white w-full relative overflow-hidden" aria-label="Inicio">
 
       {/* ── Fondo decorativo ─────────────────────────────────────────── */}
       <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">

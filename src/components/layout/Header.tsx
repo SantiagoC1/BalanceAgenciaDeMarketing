@@ -9,6 +9,10 @@ interface NavItem {
   href:  string;
 }
 
+interface HeaderProps {
+  onDiagnostico?: () => void;
+}
+
 /* ── Datos ───────────────────────────────────────────────────────────────── */
 
 const NAV_ITEMS: NavItem[] = [
@@ -20,9 +24,9 @@ const NAV_ITEMS: NavItem[] = [
 
 /* ── Componente ──────────────────────────────────────────────────────────── */
 
-export const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+export const Header = ({ onDiagnostico }: HeaderProps) => {
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 8);
@@ -35,6 +39,7 @@ export const Header = () => {
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.history.pushState({}, '', '/');
     closeMenu();
   };
 
@@ -56,12 +61,12 @@ export const Header = () => {
         <a
           href="/"
           onClick={handleLogoClick}
-          aria-label="Balance — volver al inicio"
+          aria-label="Balance - volver al inicio"
         >
           <img
             src={logoCortoFB}
             alt="Balance"
-            className="h-10 md:h-30 w-auto object-contain"
+            className="h-10 md:h-10 w-auto object-contain max-w-[120px]"
           />
         </a>
 
@@ -84,8 +89,9 @@ export const Header = () => {
         </ul>
 
         {/* Desktop CTA */}
-        <a
-          href="#contacto"
+        <button
+          type="button"
+          onClick={onDiagnostico}
           className="
             hidden md:inline-flex items-center
             font-display font-medium text-sm
@@ -95,7 +101,7 @@ export const Header = () => {
           "
         >
           Hacer diagnóstico
-        </a>
+        </button>
 
         {/* Hamburger — mobile */}
         <button
@@ -151,9 +157,9 @@ export const Header = () => {
                 </li>
               ))}
               <li>
-                <a
-                  href="#contacto"
-                  onClick={closeMenu}
+                <button
+                  type="button"
+                  onClick={() => { onDiagnostico?.(); closeMenu(); }}
                   className="
                     inline-flex items-center
                     font-display font-medium text-sm
@@ -163,7 +169,7 @@ export const Header = () => {
                   "
                 >
                   Hacer diagnóstico
-                </a>
+                </button>
               </li>
             </ul>
           </motion.div>
