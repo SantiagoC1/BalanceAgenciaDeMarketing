@@ -54,7 +54,7 @@ const CASOS: CasoPortfolio[] = [
   {
     id:         'glow-pro',
     titulo:     'Glow Pro',
-    cliente:    'Marca de guantes para arqueros',
+    cliente:    'Marca de guantes para arqueros · ITA',
     categorias: ['Estrategia digital'],
     video:      glowProVideo,
     numero:     '03',

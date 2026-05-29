@@ -29,16 +29,18 @@ export async function submitLead(data: Record<string, string>): Promise<{ ok: bo
  * Obtiene la configuración del sitio desde el Apps Script.
  */
 export async function getConfig(): Promise<{
-  config:    Record<string, string>;
-  servicios: Record<string, string>[];
-  portfolio: Record<string, string>[];
+  config:     Record<string, string>;
+  servicios:  Record<string, string>[];
+  portfolio:  Record<string, string>[];
+  formConfig: Record<string, string>;
 } | null> {
   try {
     const response = await fetch(`${APPS_SCRIPT_URL}?action=config`);
     const data = await response.json() as {
-      config:    Record<string, string>;
-      servicios: Record<string, string>[];
-      portfolio: Record<string, string>[];
+      config:     Record<string, string>;
+      servicios:  Record<string, string>[];
+      portfolio:  Record<string, string>[];
+      formConfig: Record<string, string>;
     };
     return data;
   } catch {

@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, CheckCircle2 } from 'lucide-react';
 import { submitLead } from '../../lib/api';
+import type { FormConfig } from '../../hooks/useConfig';
 
 /* ── Tipos ───────────────────────────────────────────────────────────────── */
 
 interface Props {
-  isOpen:  boolean;
-  onClose: () => void;
+  isOpen:     boolean;
+  onClose:    () => void;
+  formConfig: FormConfig;
 }
 
 interface FormState {
@@ -46,11 +48,6 @@ const INITIAL_FORM: FormState = {
 
 /* ── Constantes de pasos ─────────────────────────────────────────────────── */
 
-const COMO_VENDE_OPTS    = ['Desde el local', 'De manera online', 'Ambas'] as const;
-const OBJETIVOS_OPTS     = ['Darnos a conocer', 'Generar comunidad', 'Crecer en seguidores', 'Aumentar ventas', 'Fidelizar clientes', 'Otro'] as const;
-const SERVICIOS_OPTS     = ['Gestión y estrategias de contenidos digitales', 'Arquitectura de marca', 'Consultorías y mentoría de impacto'] as const;
-const MATERIAL_OPTS      = ['Fotos', 'Videos', 'No tengo material'] as const;
-const INVERSION_OPTS     = ['$150.000 - $250.000', '$250.000 - $350.000', '$350.000 - $450.000', '$450.000 - $550.000'] as const;
 
 /* ── Variantes de animación de paso ─────────────────────────────────────── */
 
@@ -136,7 +133,7 @@ const CheckOpt = ({ label, selected, onClick }: CheckOptProps) => (
 
 /* ── Componente principal ────────────────────────────────────────────────── */
 
-export const DiagnosticoModal = ({ isOpen, onClose }: Props) => {
+export const DiagnosticoModal = ({ isOpen, onClose, formConfig }: Props) => {
   const [step,      setStep]      = useState(1);
   const [direction, setDirection] = useState(1);
   const [errors,    setErrors]    = useState<Record<string, string>>({});
@@ -457,7 +454,7 @@ export const DiagnosticoModal = ({ isOpen, onClose }: Props) => {
                               ¿Cómo vendés? <span className="text-red-500">*</span>
                             </label>
                             <div className="grid grid-cols-1 gap-2">
-                              {COMO_VENDE_OPTS.map(opt => (
+                              {formConfig.como_vende.map(opt => (
                                 <RadioOpt
                                   key={opt}
                                   label={opt}
@@ -520,7 +517,7 @@ export const DiagnosticoModal = ({ isOpen, onClose }: Props) => {
                               </span>
                             </label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                              {OBJETIVOS_OPTS.map(opt => (
+                              {formConfig.objetivos.map(opt => (
                                 <CheckOpt
                                   key={opt}
                                   label={opt}
@@ -557,7 +554,7 @@ export const DiagnosticoModal = ({ isOpen, onClose }: Props) => {
                               </span>
                             </label>
                             <div className="grid grid-cols-1 gap-2">
-                              {SERVICIOS_OPTS.map(opt => (
+                              {formConfig.servicios.map(opt => (
                                 <CheckOpt
                                   key={opt}
                                   label={opt}
@@ -599,7 +596,7 @@ export const DiagnosticoModal = ({ isOpen, onClose }: Props) => {
                               <span className="text-red-500">*</span>
                             </label>
                             <div className="grid grid-cols-1 gap-2">
-                              {MATERIAL_OPTS.map(opt => (
+                              {formConfig.material_visual.map(opt => (
                                 <CheckOpt
                                   key={opt}
                                   label={opt}
@@ -620,7 +617,7 @@ export const DiagnosticoModal = ({ isOpen, onClose }: Props) => {
                               <span className="text-red-500">*</span>
                             </label>
                             <div className="grid grid-cols-1 gap-2">
-                              {INVERSION_OPTS.map(opt => (
+                              {formConfig.inversion.map(opt => (
                                 <RadioOpt
                                   key={opt}
                                   label={opt}

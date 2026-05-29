@@ -65,7 +65,10 @@ export const Header = ({ onDiagnostico }: HeaderProps) => {
         >
           <img
             src={logoCortoFB}
-            alt="Balance"
+            alt="Balance — Agencia de Marketing y Comunicación"
+            width={120}
+            height={40}
+            loading="eager"
             className="h-10 md:h-10 w-auto object-contain max-w-[120px]"
           />
         </a>
@@ -145,7 +148,14 @@ export const Header = ({ onDiagnostico }: HeaderProps) => {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    onClick={closeMenu}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMenuOpen(false);
+                      setTimeout(() => {
+                        const el = document.querySelector(item.href);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }, 300);
+                    }}
                     className="
                       block font-display font-medium text-base py-1
                       text-brand-black hover:text-brand-violet

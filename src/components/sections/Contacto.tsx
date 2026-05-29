@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Mail } from 'lucide-react';
+import { useConfig } from '../../hooks/useConfig';
 
 /* ── Props ───────────────────────────────────────────────────────────────── */
 
@@ -69,42 +70,43 @@ const bgRevealVariants = {
   hover: { scale: 1, opacity: 1 },
 };
 
-/* ── Datos de contacto ───────────────────────────────────────────────────── */
-
-const CONTACT_LINKS = [
-  {
-    href:    'mailto:somosbalance.mkt@gmail.com',
-    label:   'somosbalance.mkt@gmail.com',
-    ariaLabel: 'Enviar email a Balance',
-    icon:    <Mail size={18} aria-hidden="true" />,
-    external: true,
-  },
-  {
-    href:    'https://www.instagram.com/balance.marketing?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
-    label:   '@balance.marketing',
-    ariaLabel: 'Instagram de Balance',
-    icon:    <InstagramIcon />,
-    external: true,
-  },
-  {
-    href:    'https://www.linkedin.com/in/balance-group-752621286',
-    label:   'Balance Group',
-    ariaLabel: 'LinkedIn de Balance',
-    icon:    <LinkedInIcon />,
-    external: true,
-  },
-  {
-    href:    'https://www.behance.net/balancegroup',
-    label:   'balancegroup',
-    ariaLabel: 'Behance de Balance',
-    icon:    <BehanceIcon />,
-    external: true,
-  },
-] as const;
 
 /* ── Componente ──────────────────────────────────────────────────────────── */
 
 export const Contacto = ({ onOpen }: ContactoProps) => {
+  const { config = {} } = useConfig()
+
+  const contactLinks = [
+    {
+      href:      `mailto:${config?.email || 'somosbalance.mkt@gmail.com'}`,
+      label:     config?.email || 'somosbalance.mkt@gmail.com',
+      ariaLabel: 'Enviar email a Balance',
+      icon:      <Mail size={18} aria-hidden="true" />,
+      external:  true,
+    },
+    {
+      href:      config?.instagram || 'https://www.instagram.com/balance.marketing',
+      label:     '@balance.marketing',
+      ariaLabel: 'Instagram de Balance',
+      icon:      <InstagramIcon />,
+      external:  true,
+    },
+    {
+      href:      config?.linkedin || 'https://www.linkedin.com/in/balance-group-752621286',
+      label:     'balance-group',
+      ariaLabel: 'LinkedIn de Balance',
+      icon:      <LinkedInIcon />,
+      external:  true,
+    },
+    {
+      href:      config?.behance || 'https://www.behance.net/balancegroup',
+      label:     'balancegroup',
+      ariaLabel: 'Behance de Balance',
+      icon:      <BehanceIcon />,
+      external:  true,
+    },
+  ]
+
   /* ── Efecto magnético ──────────────────────────────────────────────────── */
   const magnetRef = useRef<HTMLDivElement>(null);
   const rawX      = useMotionValue(0);
@@ -174,7 +176,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
             className="font-display font-black text-white leading-none mb-2"
             style={{ fontSize: 'clamp(48px, 8vw, 120px)' }}
           >
-            ¿Lista para
+            ¿Listo para
           </h2>
           <h2
             className="font-script text-brand-violet leading-none mb-12"
@@ -193,19 +195,19 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-            className="space-y-6"
+            className="space-y-6 order-2 md:order-1"
           >
             {/* Separador decorativo */}
             <div className="flex items-center gap-4">
               <div className="w-8 h-px bg-brand-violet flex-shrink-0" />
               <p className="font-display text-white/40 text-sm">
-                Respondemos en menos de 24 horas
+                Respondemos en menos de 24 horas habiles
               </p>
             </div>
 
             {/* Links de contacto */}
             <div className="space-y-3">
-              {CONTACT_LINKS.map(({ href, label, ariaLabel, icon, external }) => (
+              {contactLinks.map(({ href, label, ariaLabel, icon, external }) => (
                 <a
                   key={href}
                   href={href}
@@ -235,7 +237,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
-            className="flex flex-col items-center md:items-end gap-8"
+            className="flex flex-col items-center md:items-end gap-8 order-1 md:order-2"
           >
             {/* Zona magnética */}
             <div
@@ -276,8 +278,8 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
             </div>
 
             {/* Leyenda */}
-            <p className="font-display text-white/25 text-xs text-center md:text-right max-w-[200px]">
-              Sin compromiso · Respondemos en 24hs
+            <p className="hidden md:block font-display text-white/25 text-xs text-center md:text-right max-w-[200px]">
+              Sin compromiso · Respondemos en 24hs habiles
             </p>
           </motion.div>
 

@@ -72,7 +72,10 @@ export const Footer = () => {
           <div className="flex flex-col gap-2">
             <img
               src={logoCompletoFN}
-              alt="Balance"
+              alt="Balance — Agencia de Marketing y Comunicación Argentina"
+              width={200}
+              height={80}
+              loading="lazy"
               className="h-20 w-auto object-contain"
             />
             <p className="font-display text-sm text-brand-gray max-w-xs leading-relaxed">
@@ -102,6 +105,7 @@ export const Footer = () => {
             <a
               href="https://www.instagram.com/balance.marketing?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               aria-label="Instagram de Balance (próximamente)"
+              target="_blank"
               className="text-brand-gray hover:text-brand-white transition-colors duration-200"
             >
               <InstagramIcon />

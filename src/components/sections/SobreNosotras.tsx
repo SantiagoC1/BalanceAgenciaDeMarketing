@@ -122,7 +122,10 @@ export const SobreNosotras = () => {
         >
           <img
             src={piliFoto}
-            alt="Pili, co-fundadora de Balance"
+            alt="Pili, co-fundadora de Balance — agencia de marketing argentina"
+            width={600}
+            height={750}
+            loading="lazy"
             className="w-full h-full object-cover object-top"
           />
 
@@ -164,7 +167,10 @@ export const SobreNosotras = () => {
         >
           <img
             src={pachiFoto}
-            alt="Pachi, co-fundadora de Balance"
+            alt="Pachi, co-fundadora de Balance — agencia de marketing argentina"
+            width={600}
+            height={750}
+            loading="lazy"
             className="w-full h-full object-cover object-top"
           />
 

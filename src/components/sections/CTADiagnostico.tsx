@@ -1,12 +1,5 @@
 import { motion } from 'framer-motion';
-
-/* ── Datos ───────────────────────────────────────────────────────────────── */
-
-const STATS = [
-  { value: '30 min', label: 'Diagnóstico'       },
-  { value: '+100',   label: 'Marcas analizadas'  },
-  { value: '0 $',    label: 'Sin costo'          },
-] as const;
+import { useConfig } from '../../hooks/useConfig';
 
 /* ── Helpers de animación ────────────────────────────────────────────────── */
 
@@ -21,6 +14,8 @@ const fadeUp = (delay = 0) =>
 /* ── Componente ──────────────────────────────────────────────────────────── */
 
 export const CTADiagnostico = () => {
+  const { config = {} } = useConfig()
+
   return (
     <section className="relative bg-brand-black min-h-[70vh] flex items-center justify-center py-24 px-6 overflow-hidden text-center">
 
@@ -63,7 +58,7 @@ export const CTADiagnostico = () => {
           {...fadeUp(0.24)}
           className="font-display text-lg text-white/50 max-w-md mx-auto mt-4"
         >
-          En 30 minutos analizamos tu presencia digital y te damos un diagnóstico
+          En 5 minutos analizamos tu presencia digital y te damos un diagnóstico
           honesto. Sin compromiso.
         </motion.p>
 
@@ -98,21 +93,26 @@ export const CTADiagnostico = () => {
           {...fadeUp(0.48)}
           className="flex items-center mt-16"
         >
-          {STATS.map((stat, i) => (
-            <div key={stat.label} className="flex items-center">
-              {i > 0 && (
-                <div className="w-px h-10 bg-white/10 mx-4 md:mx-8" aria-hidden="true" />
-              )}
-              <div className="flex flex-col items-center">
-                <span className="font-display font-black text-2xl text-brand-white leading-none">
-                  {stat.value}
-                </span>
-                <span className="font-display text-xs text-white/40 mt-1">
-                  {stat.label}
-                </span>
-              </div>
-            </div>
-          ))}
+          <div className="flex flex-col items-center">
+            <span className="font-display font-black text-2xl text-brand-white leading-none">5 min</span>
+            <span className="font-display text-xs text-white/40 mt-1">Diagnóstico</span>
+          </div>
+
+          <div className="w-px h-10 bg-white/10 mx-4 md:mx-8" aria-hidden="true" />
+
+          <div className="flex flex-col items-center">
+            <span className="font-display font-black text-2xl text-brand-white leading-none">
+              + {config?.marcas || '30'}
+            </span>
+            <span className="font-display text-xs text-white/40 mt-1">Marcas analizadas</span>
+          </div>
+
+          <div className="w-px h-10 bg-white/10 mx-4 md:mx-8" aria-hidden="true" />
+
+          <div className="flex flex-col items-center">
+            <span className="font-display font-black text-2xl text-brand-white leading-none">0 $</span>
+            <span className="font-display text-xs text-white/40 mt-1">Sin costo</span>
+          </div>
         </motion.div>
 
       </div>

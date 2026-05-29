@@ -1,5 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
 import videoHero from '../../assets/videos/videoHero.mp4';
+import { useConfig } from '../../hooks/useConfig';
 
 /* ── Animation variants ──────────────────────────────────────────────────── */
 
@@ -28,6 +29,8 @@ const fadeUp: Variants = {
 /* ── Componente ──────────────────────────────────────────────────────────── */
 
 export const Hero = () => {
+  const { config = {} } = useConfig()
+
   return (
     <section className="bg-brand-white w-full relative overflow-hidden" aria-label="Inicio">
 
@@ -209,12 +212,16 @@ export const Hero = () => {
           {/* Stats */}
           <div className="flex items-center gap-6 self-start">
             <div>
-              <p className="font-display font-black text-3xl text-brand-black">100+</p>
+              <p className="font-display font-black text-3xl text-brand-black">
+                + {config?.marcas || '30'}
+              </p>
               <p className="font-display text-sm text-brand-black/50">marcas</p>
             </div>
             <div className="w-px h-8 bg-brand-gray" />
             <div>
-              <p className="font-display font-black text-3xl text-brand-black">5</p>
+              <p className="font-display font-black text-3xl text-brand-black">
+                + {config?.experiencia || '5'}
+              </p>
               <p className="font-display text-sm text-brand-black/50">años de experiencia</p>
             </div>
           </div>

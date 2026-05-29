@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,6 +35,13 @@
     <meta name="geo.placename" content="Argentina" />
     <meta name="language" content="Spanish" />
     <meta name="revisit-after" content="7 days" />
+    <meta name="rating" content="general" />
+    <meta name="category" content="marketing, comunicacion, branding" />
+    <meta name="coverage" content="Argentina" />
+    <meta name="distribution" content="global" />
+    <meta name="target" content="all" />
+    <meta name="DC.language" content="es-AR" />
+    <meta name="DC.coverage" content="Argentina" />
 
     <!-- Theme color para mobile browsers -->
     <meta name="theme-color" content="#171616" />
@@ -47,8 +54,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Preload fuente principal -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=DM+Sans:wght@400;500;700;900&display=swap" />
+    <!-- Fuentes Google (carga no-bloqueante) -->
+    <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=DM+Sans:wght@400;500;700;900&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=DM+Sans:wght@400;500;700;900&display=swap" />
+    </noscript>
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -56,10 +68,19 @@
       "@context": "https://schema.org",
       "@type": "MarketingAgency",
       "name": "Balance Agencia",
+      "alternateName": "Balance Group",
+      "slogan": "Comunicación y Marketing para marcas y líderes",
       "description": "Agencia de marketing y comunicación para marcas y líderes. Especialistas en gestión de contenidos, arquitectura de marca y mentoría.",
       "url": "https://www.somosbalance.com.ar",
       "logo": "https://www.somosbalance.com.ar/favicon.png",
       "foundingDate": "2020",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AR",
+        "addressRegion": "Buenos Aires"
+      },
+      "openingHours": "Mo-Fr 09:00-18:00",
       "areaServed": {
         "@type": "Country",
         "name": "Argentina"
