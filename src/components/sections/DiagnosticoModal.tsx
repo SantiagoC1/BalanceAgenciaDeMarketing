@@ -331,7 +331,7 @@ export const DiagnosticoModal = ({ isOpen, onClose, formConfig }: Props) => {
                   ¡Diagnóstico enviado!
                 </h3>
                 <p className="font-display text-brand-black/60 mt-2">
-                  Te contactamos en menos de 24 horas.
+                  Te contactamos en menos de 24 horas hábiles.
                 </p>
                 <button
                   type="button"

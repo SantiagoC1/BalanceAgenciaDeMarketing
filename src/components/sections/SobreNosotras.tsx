@@ -210,6 +210,7 @@ export const SobreNosotras = () => {
           viewport={{ once: true }}
           className="
             absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+            md:top-1/4 md:-translate-y-1/4
             z-20 flex flex-col items-center gap-4
             pointer-events-none
           "

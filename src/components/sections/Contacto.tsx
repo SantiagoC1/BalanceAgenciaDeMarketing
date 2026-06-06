@@ -201,7 +201,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
             <div className="flex items-center gap-4">
               <div className="w-8 h-px bg-brand-violet flex-shrink-0" />
               <p className="font-display text-white/40 text-sm">
-                Respondemos en menos de 24 horas habiles
+                Respondemos en menos de 24 horas hábiles
               </p>
             </div>
 
@@ -279,7 +279,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
 
             {/* Leyenda */}
             <p className="hidden md:block font-display text-white/25 text-xs text-center md:text-right max-w-[200px]">
-              Sin compromiso · Respondemos en 24hs habiles
+              Sin compromiso · Respondemos en 24hs hábiles
             </p>
           </motion.div>
 

@@ -9,6 +9,7 @@ import {
   Contacto,
 } from '../components/sections';
 import { DiagnosticoModal } from '../components/sections/DiagnosticoModal';
+import { WhatsAppButton } from '../components/ui/WhatsAppButton';
 import { useConfig } from '../hooks/useConfig';
 
 export const Home = () => {
@@ -28,6 +29,7 @@ export const Home = () => {
         onClose={() => setModalOpen(false)}
         formConfig={formConfig}
       />
+      <WhatsAppButton />
     </Layout>
   );
 };
