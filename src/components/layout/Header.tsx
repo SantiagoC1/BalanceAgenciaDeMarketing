@@ -18,6 +18,7 @@ interface HeaderProps {
 
 const NAV_ITEMS: NavItem[] = [
   { label: 'Sobre Nosotras', href: '#nosotras'  },
+  { label: 'Equipo',         href: '#equipo'    },
   { label: 'Servicios',      href: '#servicios' },
   { label: 'Portfolio',      href: '#portfolio' },
   { label: 'Contacto',       href: '#contacto'  },

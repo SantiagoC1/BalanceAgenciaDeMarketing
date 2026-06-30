@@ -4,6 +4,7 @@ import {
   Hero,
   SobreNosotras,
   Servicios,
+  Colaborador,
   Portfolio,
   CTADiagnostico,
   Contacto,
@@ -21,6 +22,7 @@ export const Home = () => {
       <Hero />
       <SobreNosotras />
       <Servicios />
+      <Colaborador />
       <Portfolio />
       <CTADiagnostico />
       <Contacto onOpen={() => setModalOpen(true)} />
