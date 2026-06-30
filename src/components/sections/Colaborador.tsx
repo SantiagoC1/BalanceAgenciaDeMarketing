@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import santiagoFoto from '../../assets/images/santiago.png';
+import santiagoFoto from '../../assets/images/Santiago.png';
 import piliFoto    from '../../assets/images/Pili.png';
 import pachiFoto   from '../../assets/images/Pachi.png';
 
