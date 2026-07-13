@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import { useConfig } from '../../hooks/useConfig';
+import { useTranslation } from '../../i18n/useTranslation';
 
 /* ── Props ───────────────────────────────────────────────────────────────── */
 
@@ -75,33 +76,34 @@ const bgRevealVariants = {
 
 export const Contacto = ({ onOpen }: ContactoProps) => {
   const { config = {} } = useConfig()
+  const { t } = useTranslation()
 
   const contactLinks = [
     {
       href:      `mailto:${config?.email || 'somosbalance.mkt@gmail.com'}`,
       label:     config?.email || 'somosbalance.mkt@gmail.com',
-      ariaLabel: 'Enviar email a Balance',
+      ariaLabel: t('contact_email_aria'),
       icon:      <Mail size={18} aria-hidden="true" />,
       external:  true,
     },
     {
       href:      config?.instagram || 'https://www.instagram.com/balance.marketing',
-      label:     '@balance.marketing',
-      ariaLabel: 'Instagram de Balance',
+      label:     t('contact_instagram_label'),
+      ariaLabel: t('contact_instagram_aria'),
       icon:      <InstagramIcon />,
       external:  true,
     },
     {
       href:      config?.linkedin || 'https://www.linkedin.com/in/balance-group-752621286',
-      label:     'balance-group',
-      ariaLabel: 'LinkedIn de Balance',
+      label:     t('contact_linkedin_label'),
+      ariaLabel: t('contact_linkedin_aria'),
       icon:      <LinkedInIcon />,
       external:  true,
     },
     {
       href:      config?.behance || 'https://www.behance.net/balancegroup',
-      label:     'balancegroup',
-      ariaLabel: 'Behance de Balance',
+      label:     t('contact_behance_label'),
+      ariaLabel: t('contact_behance_aria'),
       icon:      <BehanceIcon />,
       external:  true,
     },
@@ -133,7 +135,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
     <section
       id="contacto"
       className="bg-brand-black min-h-screen flex flex-col justify-center relative overflow-hidden py-24 px-6 scroll-mt-16 md:scroll-mt-20"
-      aria-label="Contacto"
+      aria-label={t('contact_aria_label')}
     >
 
       {/* ── Texto fantasma rotante ─────────────────────────────────────── */}
@@ -147,7 +149,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
           className="text-white/[0.03] font-display font-black whitespace-nowrap"
           style={{ fontSize: 'clamp(80px, 15vw, 180px)', letterSpacing: '-0.02em' }}
         >
-          HABLEMOS · HABLEMOS · HABLEMOS ·
+          {t('contact_ghost_text')}
         </motion.p>
       </div>
 
@@ -162,7 +164,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="font-display font-medium text-brand-green tracking-widest uppercase text-xs mb-8"
         >
-          CONTACTO
+          {t('contact_label')}
         </motion.p>
 
         {/* Headline enorme */}
@@ -176,13 +178,13 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
             className="font-display font-black text-white leading-none mb-2"
             style={{ fontSize: 'clamp(48px, 8vw, 120px)' }}
           >
-            ¿Listo para
+            {t('contact_heading_1')}
           </h2>
           <h2
             className="font-script text-brand-violet leading-none mb-12"
             style={{ fontSize: 'clamp(48px, 8vw, 120px)' }}
           >
-            construir tu marca?
+            {t('contact_heading_2_script')}
           </h2>
         </motion.div>
 
@@ -201,7 +203,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
             <div className="flex items-center gap-4">
               <div className="w-8 h-px bg-brand-violet flex-shrink-0" />
               <p className="font-display text-white/40 text-sm">
-                Respondemos en menos de 24 horas hábiles
+                {t('contact_response_time')}
               </p>
             </div>
 
@@ -227,7 +229,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
 
             {/* Frase script */}
             <p className="font-script text-brand-violet text-2xl pt-4">
-              Creamos juntos ✦
+              {t('contact_script_phrase')}
             </p>
           </motion.div>
 
@@ -259,7 +261,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
                   boxShadow: '0 0 60px rgba(76,76,230,0.3)',
                 }}
                 className="relative w-52 h-52 rounded-full bg-brand-violet flex flex-col items-center justify-center cursor-pointer overflow-hidden"
-                aria-label="Abrir formulario de diagnóstico gratuito"
+                aria-label={t('contact_cta_aria')}
               >
                 {/* Fondo verde que aparece en hover */}
                 <motion.div
@@ -270,7 +272,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
 
                 {/* Texto */}
                 <span className="relative z-10 font-display font-black text-white text-lg text-center leading-tight">
-                  Hacer<br />diagnóstico<br />gratuito
+                  {t('contact_cta_line1')}<br />{t('contact_cta_line2')}<br />{t('contact_cta_line3')}
                 </span>
 
                 
@@ -279,7 +281,7 @@ export const Contacto = ({ onOpen }: ContactoProps) => {
 
             {/* Leyenda */}
             <p className="hidden md:block font-display text-white/25 text-xs text-center md:text-right max-w-[200px]">
-              Sin compromiso · Respondemos en 24hs hábiles
+              {t('contact_legend')}
             </p>
           </motion.div>
 

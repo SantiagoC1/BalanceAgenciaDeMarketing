@@ -2,17 +2,18 @@ import { motion } from 'framer-motion';
 import santiagoFoto from '../../assets/images/Santiago.png';
 import piliFoto    from '../../assets/images/Pili.png';
 import pachiFoto   from '../../assets/images/Pachi.png';
+import { useTranslation } from '../../i18n/useTranslation';
 
 /* ── Tipos ───────────────────────────────────────────────────────────────── */
 
 interface Miembro {
   foto:         string;
   nombre:       string;
-  rol:          string;
-  pill:         string;
+  rolKey:       string;
+  pillKey:      string;
   pillClass:    string;
   blendMode?:   boolean;
-  alt:          string;
+  altKey:       string;
   overlayBase:  string;
   overlayHover: string;
 }
@@ -28,33 +29,33 @@ const EQUIPO: Miembro[] = [
   {
     foto:         piliFoto,
     nombre:       'Pili',
-    rol:          'Dirección de Marketing & Estrategia',
-    pill:         'Marketing & Estrategia',
+    rolKey:       'team_pili_rol',
+    pillKey:      'team_pili_pill',
     pillClass:    'bg-brand-green',
     blendMode:    true,
-    alt:          'Pili - Dirección de Marketing y Estrategia',
+    altKey:       'team_pili_alt',
     overlayBase:  VIOLET_BASE,
     overlayHover: VIOLET_HOVER,
   },
   {
     foto:         pachiFoto,
     nombre:       'Pachi',
-    rol:          'Dirección de Comunicación & Experiencia de marca',
-    pill:         'Comunicación & Marca',
+    rolKey:       'team_pachi_rol',
+    pillKey:      'team_pachi_pill',
     pillClass:    'bg-brand-violet/80',
     blendMode:    true,
-    alt:          'Pachi - Dirección de Comunicación y Experiencia de marca',
+    altKey:       'team_pachi_alt',
     overlayBase:  GREEN_BASE,
     overlayHover: GREEN_HOVER,
   },
   {
     foto:         santiagoFoto,
     nombre:       'Santi',
-    rol:          'Desarrollo Fullstack & Tecnología',
-    pill:         'Desarrollo Web & IA',
+    rolKey:       'team_santi_rol',
+    pillKey:      'team_santi_pill',
     pillClass:    'bg-brand-green/80',
     blendMode:    false,
-    alt:          'Santiago Cáceres - Desarrollador Fullstack',
+    altKey:       'team_santi_alt',
     overlayBase:  VIOLET_BASE,
     overlayHover: VIOLET_HOVER,
   },
@@ -70,6 +71,8 @@ const pillVariants = {
 /* ── Componente ──────────────────────────────────────────────────────────── */
 
 export const Colaborador = () => {
+  const { t } = useTranslation();
+
   return (
     <section
       id="equipo"
@@ -114,7 +117,7 @@ export const Colaborador = () => {
           viewport={{ once: true }}
           className="text-brand-green tracking-widest uppercase text-xs font-medium"
         >
-          NUESTRO EQUIPO
+          {t('team_label')}
         </motion.p>
 
         <motion.div
@@ -125,13 +128,13 @@ export const Colaborador = () => {
           className="mt-4"
         >
           <h2 className="font-display font-black text-brand-black text-4xl md:text-6xl leading-tight">
-            Las personas
+            {t('team_heading_1')}
           </h2>
           <h2 className="font-script text-brand-violet text-4xl md:text-6xl leading-tight">
-            detrás de Balance
+            {t('team_heading_2')}
           </h2>
           <p className="text-brand-black/50 text-lg mt-4">
-            Comunicación, estrategia y tecnología en un solo lugar.
+            {t('team_subtitle')}
           </p>
         </motion.div>
 
@@ -159,7 +162,7 @@ export const Colaborador = () => {
                 {/* Foto */}
                 <img
                   src={miembro.foto}
-                  alt={miembro.alt}
+                  alt={t(miembro.altKey)}
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   style={miembro.blendMode ? { mixBlendMode: 'multiply' } : undefined}
@@ -183,7 +186,7 @@ export const Colaborador = () => {
                     {miembro.nombre}
                   </p>
                   <p className="text-white/70 text-sm mt-1">
-                    {miembro.rol}
+                    {t(miembro.rolKey)}
                   </p>
 
                   {/* Pill — aparece solo en hover */}
@@ -191,7 +194,7 @@ export const Colaborador = () => {
                     <span
                       className={`${miembro.pillClass} text-white rounded-full text-xs px-3 py-1 inline-block`}
                     >
-                      {miembro.pill}
+                      {t(miembro.pillKey)}
                     </span>
                   </motion.div>
                 </div>

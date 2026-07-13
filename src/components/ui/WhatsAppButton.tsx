@@ -1,9 +1,15 @@
 import { useConfig } from '../../hooks/useConfig'
 
 export function WhatsAppButton() {
-  const { config } = useConfig()
-  const phone = config?.whatsapp || '5491112345678'
-  const url = `https://wa.me/${phone}`
+  const { config, loading } = useConfig()
+
+  if (loading) return null
+
+  const numero = config?.whatsapp || '5492212013625'
+
+  const url = config?.whatsapp_mensaje
+    ? `https://wa.me/${numero}?text=${encodeURIComponent(config.whatsapp_mensaje)}`
+    : `https://wa.me/${numero}`
 
   return (
     <a

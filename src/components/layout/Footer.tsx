@@ -1,4 +1,5 @@
 import logoCompletoFN from '../../assets/images/LogoCompletoFN.png';
+import { useTranslation } from '../../i18n/useTranslation';
 
 /* ── Brand SVG icons (Lucide v1.16 no incluye iconos de marca) ── */
 const InstagramIcon = () => (
@@ -48,19 +49,16 @@ const BehanceIcon = () => (
   </svg>
 );
 
-interface FooterNavItem {
-  label: string;
-  href:  string;
-}
-
-const FOOTER_NAV: FooterNavItem[] = [
-  { label: 'Sobre Nosotras', href: '#nosotras'  },
-  { label: 'Servicios',      href: '#servicios' },
-  { label: 'Portfolio',      href: '#portfolio' },
-  { label: 'Contacto',       href: '#contacto'  },
+const FOOTER_NAV: { labelKey: string; href: string }[] = [
+  { labelKey: 'nav_about',    href: '#nosotras'  },
+  { labelKey: 'nav_services', href: '#servicios' },
+  { labelKey: 'nav_portfolio', href: '#portfolio' },
+  { labelKey: 'nav_contact',  href: '#contacto'  },
 ];
 
 export const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-brand-black text-brand-white">
       <div className="max-w-6xl mx-auto px-6 md:px-10 py-12 md:py-16">
@@ -72,19 +70,19 @@ export const Footer = () => {
           <div className="flex flex-col gap-2">
             <img
               src={logoCompletoFN}
-              alt="Balance — Agencia de Marketing y Comunicación Argentina"
+              alt={t('footer_logo_alt')}
               width={200}
               height={80}
               loading="lazy"
               className="h-20 w-auto object-contain"
             />
             <p className="font-display text-sm text-brand-gray max-w-xs leading-relaxed">
-              Comunicación y Marketing para marcas y líderes
+              {t('footer_tagline')}
             </p>
           </div>
 
           {/* Nav links */}
-          <nav aria-label="Navegación secundaria">
+          <nav aria-label={t('header_nav_aria')}>
             <ul className="flex flex-wrap gap-x-6 gap-y-2 list-none m-0 p-0">
               {FOOTER_NAV.map((item) => (
                 <li key={item.href}>
@@ -93,7 +91,7 @@ export const Footer = () => {
                     className="font-display font-medium text-sm text-brand-gray
                                hover:text-brand-white transition-colors duration-200"
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </a>
                 </li>
               ))}
@@ -104,7 +102,7 @@ export const Footer = () => {
           <div className="flex items-center gap-4">
             <a
               href="https://www.instagram.com/balance.marketing?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-              aria-label="Instagram de Balance (próximamente)"
+              aria-label={t('footer_instagram_aria')}
               target="_blank"
               className="text-brand-gray hover:text-brand-white transition-colors duration-200"
             >
@@ -114,7 +112,7 @@ export const Footer = () => {
               href="https://www.linkedin.com/in/balance-group-752621286"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn de Balance"
+              aria-label={t('footer_linkedin_aria')}
               className="text-brand-gray hover:text-brand-white transition-colors duration-200"
             >
               <LinkedinIcon />
@@ -123,7 +121,7 @@ export const Footer = () => {
               href="https://www.behance.net/balancegroup"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Behance de Balance"
+              aria-label={t('footer_behance_aria')}
               className="text-brand-gray hover:text-brand-white transition-colors duration-200"
             >
               <BehanceIcon />
@@ -134,9 +132,9 @@ export const Footer = () => {
         {/* Divider */}
         <div className="mt-10 border-t border-brand-gray/20 pt-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-2 text-white/30 text-xs font-display">
-            <span>© {new Date().getFullYear()} Balance. Todos los derechos reservados.</span>
+            <span>© {new Date().getFullYear()} Balance. {t('footer_rights')}</span>
             <span>
-              Desarrollado por{' '}
+              {t('footer_dev_by')}{' '}
               <a
                 href="https://scdev.com.ar/"
                 target="_blank"

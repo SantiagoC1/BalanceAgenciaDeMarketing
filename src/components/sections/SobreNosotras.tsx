@@ -1,6 +1,7 @@
 import { motion, type Variants } from 'framer-motion';
 import piliFoto  from '../../assets/images/Pili.png';
 import pachiFoto from '../../assets/images/Pachi.png';
+import { useTranslation } from '../../i18n/useTranslation';
 
 /* ── Animation variants ──────────────────────────────────────────────────── */
 
@@ -47,29 +48,31 @@ const pillItem: Variants = {
 
 /* ── Datos ───────────────────────────────────────────────────────────────── */
 
-const PILLS = [
-  { label: 'Comunicación estratégica', accent: false },
-  { label: 'Identidad memorable',      accent: true  },
-  { label: 'Contenido con impacto',    accent: false },
+const PILL_KEYS = [
+  { key: 'about_pill_1', accent: false },
+  { key: 'about_pill_2', accent: true  },
+  { key: 'about_pill_3', accent: false },
 ] as const;
 
 /* ── Componente ──────────────────────────────────────────────────────────── */
 
 export const SobreNosotras = () => {
+  const { t } = useTranslation();
+
   return (
-    <section id="nosotras" className="bg-brand-black w-full scroll-mt-16 md:scroll-mt-20" aria-label="Sobre nosotras">
+    <section id="nosotras" className="bg-brand-black w-full scroll-mt-16 md:scroll-mt-20" aria-label={t('about_aria_label')}>
 
       {/* ── MOBILE: fotos circulares (< md) ──────────────────────────────── */}
       <div className="md:hidden flex flex-col items-center pt-16 pb-8 px-6 text-center">
 
         {/* Etiqueta + título */}
         <span className="font-display font-medium text-sm text-brand-green tracking-widest uppercase">
-          Sobre Nosotras
+          {t('about_label')}
         </span>
         <h2 className="font-display font-black text-5xl text-brand-white leading-tight tracking-tight mt-4">
-          Hola!{' '}
+          {t('about_heading_pre')}{' '}
           <span className="font-script font-bold text-brand-violet">
-            somos
+            {t('about_heading_script')}
           </span>
         </h2>
 
@@ -81,7 +84,7 @@ export const SobreNosotras = () => {
             whileInView="visible"
             viewport={{ once: true }}
             src={piliFoto}
-            alt="Pili, co-fundadora de Balance"
+            alt={t('about_pili_alt_mobile')}
             className="w-48 h-48 object-cover object-top rounded-full"
           />
           <motion.img
@@ -90,7 +93,7 @@ export const SobreNosotras = () => {
             whileInView="visible"
             viewport={{ once: true }}
             src={pachiFoto}
-            alt="Pachi, co-fundadora de Balance"
+            alt={t('about_pachi_alt_mobile')}
             className="w-40 h-40 object-cover object-top rounded-full -mt-8"
           />
         </div>
@@ -99,11 +102,11 @@ export const SobreNosotras = () => {
         <div className="flex gap-12 mt-6">
           <div>
             <p className="font-display font-black text-brand-white text-base">Pili</p>
-            <p className="font-display text-xs text-brand-white/60 mt-0.5">Co-fundadora</p>
+            <p className="font-display text-xs text-brand-white/60 mt-0.5">{t('about_cofounder')}</p>
           </div>
           <div>
             <p className="font-display font-black text-brand-white text-base">Pachi</p>
-            <p className="font-display text-xs text-brand-white/60 mt-0.5">Co-fundadora</p>
+            <p className="font-display text-xs text-brand-white/60 mt-0.5">{t('about_cofounder')}</p>
           </div>
         </div>
 
@@ -122,7 +125,7 @@ export const SobreNosotras = () => {
         >
           <img
             src={piliFoto}
-            alt="Pili, co-fundadora de Balance — agencia de marketing argentina"
+            alt={t('about_pili_alt_desktop')}
             width={600}
             height={750}
             loading="lazy"
@@ -152,7 +155,7 @@ export const SobreNosotras = () => {
               Pili
             </p>
             <p className="font-display text-sm text-brand-white/60 mt-0.5">
-              Co-fundadora
+              {t('about_cofounder')}
             </p>
           </div>
         </motion.div>
@@ -167,7 +170,7 @@ export const SobreNosotras = () => {
         >
           <img
             src={pachiFoto}
-            alt="Pachi, co-fundadora de Balance — agencia de marketing argentina"
+            alt={t('about_pachi_alt_desktop')}
             width={600}
             height={750}
             loading="lazy"
@@ -197,7 +200,7 @@ export const SobreNosotras = () => {
               Pachi
             </p>
             <p className="font-display text-sm text-brand-white/60 mt-0.5">
-              Co-fundadora
+              {t('about_cofounder')}
             </p>
           </div>
         </motion.div>
@@ -216,12 +219,12 @@ export const SobreNosotras = () => {
           "
         >
           <span className="font-display font-medium text-sm text-brand-green tracking-widest uppercase">
-            Sobre Nosotras
+            {t('about_label')}
           </span>
           <h2 className="font-display font-black text-6xl text-brand-white leading-tight tracking-tight text-center whitespace-nowrap">
-            Hola!{' '}
+            {t('about_heading_pre')}{' '}
             <span className="font-script font-bold text-brand-violet">
-              somos
+              {t('about_heading_script')}
             </span>
           </h2>
           {/* Separador vertical */}
@@ -234,8 +237,7 @@ export const SobreNosotras = () => {
       <div className="max-w-4xl mx-auto px-6 md:px-10 py-16 md:py-20 flex flex-col items-center gap-8 text-center">
 
         <p className="font-display font-normal text-xl md:text-2xl text-brand-white/75 leading-relaxed">
-          Somos el balance entre la creatividad y la estrategia que tu marca
-          necesita para construir una identidad que conecte de forma real.
+          {t('about_paragraph')}
         </p>
 
         {/* Pills */}
@@ -246,9 +248,9 @@ export const SobreNosotras = () => {
           viewport={{ once: true }}
           className="flex flex-wrap justify-center gap-3"
         >
-          {PILLS.map((pill) => (
+          {PILL_KEYS.map((pill) => (
             <motion.span
-              key={pill.label}
+              key={pill.key}
               variants={pillItem}
               className={[
                 'font-display font-medium text-sm rounded-full px-5 py-2',
@@ -257,7 +259,7 @@ export const SobreNosotras = () => {
                   : 'bg-white/10 text-brand-white/80',
               ].join(' ')}
             >
-              {pill.label}
+              {t(pill.key)}
             </motion.span>
           ))}
         </motion.div>

@@ -1,6 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useTranslation } from '../../i18n/useTranslation';
+import type { CasoPortfolioTexto } from '../../i18n/translations';
 
 import cruzDelSurVideo from '../../assets/videos/cruzDelSur.mp4';
 import growVideo        from '../../assets/videos/grow.mp4';
@@ -9,76 +11,18 @@ import bocaditosVideo   from '../../assets/videos/bocaditos.mp4';
 
 /* ── Tipos ───────────────────────────────────────────────────────────────── */
 
-interface CasoPortfolio {
-  id:          string;
-  titulo:      string;
-  cliente:     string;
-  categorias:  readonly string[];
-  video:       string;
-  descripcion: string;
-  numero:      string;
+interface CasoPortfolio extends CasoPortfolioTexto {
+  video: string;
 }
 
-/* ── Datos ───────────────────────────────────────────────────────────────── */
+/* ── Videos por id (no traducibles) ──────────────────────────────────────── */
 
-const CASOS: CasoPortfolio[] = [
-  {
-    id:         'cruz-del-sur',
-    titulo:     'Cruz del Sur',
-    cliente:    'Consultorios Médicos',
-    categorias: ['Arquitectura de marca', 'Estrategia digital'],
-    video:      cruzDelSurVideo,
-    numero:     '01',
-    descripcion:
-      'El desafío inicial fue transformar una comunicación fragmentada en una identidad ' +
-      'institucional sólida. Nos encontramos con una marca que carecía de unidad visual. ' +
-      'Nuestra intervención comenzó con la creación de una identidad visual que proyectara ' +
-      'confianza y cercanía. Rediseñamos el ecosistema digital en Instagram bajo una narrativa ' +
-      'coherente que entiende el ciclo del paciente, logrando humanizar la atención y generar ' +
-      'un entorno de seguridad para la comunidad.',
-  },
-  {
-    id:         'grow',
-    titulo:     'Grow',
-    cliente:    'Centro de Alto Rendimiento',
-    categorias: ['Arquitectura de marca', 'Estrategia digital'],
-    video:      growVideo,
-    numero:     '02',
-    descripcion:
-      'Grow nació desde los cimientos con nuestra guía. Fuimos parte de la construcción de su ' +
-      'identidad visual y diseñamos el sistema interno de la organización. El mayor reto fue la ' +
-      'dualidad de su público: hablarle con autoridad al deportista de alto rendimiento sin ' +
-      'descuidar al público general. Logramos un equilibrio entre la exigencia del rendimiento ' +
-      'y la calidez de la rehabilitación.',
-  },
-  {
-    id:         'glow-pro',
-    titulo:     'Glow Pro',
-    cliente:    'Marca de guantes para arqueros · ITA',
-    categorias: ['Estrategia digital'],
-    video:      glowProVideo,
-    numero:     '03',
-    descripcion:
-      'Para esta marca argentina con proyección en Italia, el objetivo fue claro: dejar de vender ' +
-      'guantes para empezar a vender autoridad en el arco. A través de una narrativa técnica pero ' +
-      'emocionante, posicionamos a Glow Pro como un referente de calidad y diseño internacional, ' +
-      'manteniendo viva la raíz y la garra del arquero sudamericano.',
-  },
-  {
-    id:         'bocaditos',
-    titulo:     'Bocaditos',
-    cliente:    'Coffee & Culture · USA',
-    categorias: ['Estrategia digital'],
-    video:      bocaditosVideo,
-    numero:     '04',
-    descripcion:
-      'Llevar la esencia argentina al mercado estadounidense requiere más que traducir un menú; ' +
-      'requiere transmitir una emoción. Nuestra estrategia se centró en la identidad y la ' +
-      'estacionalidad, capturando la nostalgia y la alegría del reencuentro. Logramos que la ' +
-      'cafetería fuera un espacio de pertenencia donde la cultura argentina se vive y se celebra ' +
-      'en cada detalle visual.',
-  },
-];
+const VIDEOS_POR_ID: Record<string, string> = {
+  'cruz-del-sur': cruzDelSurVideo,
+  'grow':         growVideo,
+  'glow-pro':     glowProVideo,
+  'bocaditos':    bocaditosVideo,
+};
 
 /* ── PortfolioModal ──────────────────────────────────────────────────────── */
 
@@ -88,6 +32,8 @@ interface PortfolioModalProps {
 }
 
 const PortfolioModal = ({ caso, onClose }: PortfolioModalProps) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -139,7 +85,7 @@ const PortfolioModal = ({ caso, onClose }: PortfolioModalProps) => {
           <button
             type="button"
             onClick={onClose}
-            aria-label="Cerrar"
+            aria-label={t('portfolio_modal_close_aria')}
             className="
               absolute top-3 right-3 z-10
               w-8 h-8 flex items-center justify-center
@@ -201,7 +147,7 @@ const PortfolioModal = ({ caso, onClose }: PortfolioModalProps) => {
               mt-8 block
             "
           >
-            Ver en Behance →
+            {t('portfolio_cta_behance')}
           </a>
 
         </div>
@@ -213,6 +159,12 @@ const PortfolioModal = ({ caso, onClose }: PortfolioModalProps) => {
 /* ── Portfolio (export) ──────────────────────────────────────────────────── */
 
 export const Portfolio = () => {
+  const { t, portfolio } = useTranslation();
+  const CASOS: CasoPortfolio[] = portfolio.map(caso => ({
+    ...caso,
+    video: VIDEOS_POR_ID[caso.id],
+  }));
+
   const [hoveredId,   setHoveredId]   = useState<string | null>(null);
   const [cursorPos,   setCursorPos]   = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [selectedCaso, setSelectedCaso] = useState<CasoPortfolio | null>(null);
@@ -238,7 +190,7 @@ export const Portfolio = () => {
       <section
         id="portfolio"
         className="bg-brand-white w-full scroll-mt-16 md:scroll-mt-20 py-24"
-        aria-label="Portfolio de trabajos"
+        aria-label={t('portfolio_aria_label')}
         onMouseMove={handleMouseMove}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10">
@@ -247,15 +199,15 @@ export const Portfolio = () => {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-16">
             <div className="flex flex-col gap-3">
               <span className="font-display font-medium text-sm text-brand-violet tracking-widest uppercase">
-                Nuestro Trabajo
+                {t('portfolio_label')}
               </span>
               <h2 className="font-display font-black text-5xl text-brand-black leading-tight tracking-tight">
-                Casos que{' '}
-                <span className="font-script font-bold text-brand-violet">hablan</span>
+                {t('portfolio_heading_pre')}{' '}
+                <span className="font-script font-bold text-brand-violet">{t('portfolio_heading_script')}</span>
               </h2>
             </div>
             <p className="hidden md:block font-display text-sm text-brand-black/40 pb-1">
-              4 marcas transformadas
+              {t('portfolio_stat')}
             </p>
           </div>
 
@@ -270,7 +222,7 @@ export const Portfolio = () => {
                 onClick={() => handleSelect(caso)}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleSelect(caso); }}
                 tabIndex={0}
-                aria-label={`Ver caso: ${caso.titulo} — ${caso.cliente}`}
+                aria-label={`${t('portfolio_ver_prefix')} ${caso.titulo} — ${caso.cliente}`}
                 className={[
                   'group flex items-center justify-between gap-6',
                   'border-b border-brand-black/10 py-8',
@@ -403,7 +355,7 @@ export const Portfolio = () => {
                 "
               >
                 <span className="font-display font-bold text-xs text-brand-white tracking-wider">
-                  VER
+                  {t('portfolio_cursor_ver')}
                 </span>
               </motion.div>
             )}

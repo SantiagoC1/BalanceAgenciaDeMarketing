@@ -1,6 +1,7 @@
 import { motion, type Variants } from 'framer-motion';
 import videoHero from '../../assets/videos/videoHero.mp4';
 import { useConfig } from '../../hooks/useConfig';
+import { useTranslation } from '../../i18n/useTranslation';
 
 /* ── Animation variants ──────────────────────────────────────────────────── */
 
@@ -30,9 +31,10 @@ const fadeUp: Variants = {
 
 export const Hero = () => {
   const { config = {} } = useConfig()
+  const { t } = useTranslation()
 
   return (
-    <section className="bg-brand-white w-full relative overflow-hidden" aria-label="Inicio">
+    <section className="bg-brand-white w-full relative overflow-hidden" aria-label={t('hero_aria_label')}>
 
       {/* ── Fondo decorativo ─────────────────────────────────────────── */}
       <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
@@ -105,14 +107,14 @@ export const Hero = () => {
           >
             {/* Línea 1 */}
             <span className="block text-4xl md:text-7xl text-brand-black">
-              Comunicación y Marketing
+              {t('hero_headline_1')}
             </span>
 
             {/* Línea 2: "para" DM Sans + "marcas y líderes" Dancing Script */}
             <span className="block text-4xl md:text-7xl text-brand-black mt-1">
-              para{' '}
+              {t('hero_headline_2_pre')}{' '}
               <span className="font-script font-bold text-brand-violet">
-                marcas y líderes
+                {t('hero_headline_2_script')}
               </span>
             </span>
           </motion.h1>
@@ -126,12 +128,11 @@ export const Hero = () => {
               max-w-md
             "
           >
-            Somos el balance entre la{' '}
-            <span className="text-brand-green font-medium">creatividad</span>
-            {' '}y la{' '}
-            <span className="text-brand-violet font-medium">estrategia</span>
-            {' '}que tu marca necesita para construir una identidad
-            que conecte de forma real.
+            {t('hero_subtitle_pre')}{' '}
+            <span className="text-brand-green font-medium">{t('hero_subtitle_creatividad')}</span>
+            {' '}{t('hero_subtitle_mid')}{' '}
+            <span className="text-brand-violet font-medium">{t('hero_subtitle_estrategia')}</span>
+            {' '}{t('hero_subtitle_post')}
           </motion.p>
 
           {/* CTAs */}
@@ -156,7 +157,7 @@ export const Hero = () => {
                   hover:bg-brand-violet/90
                 "
               >
-                Hacer diagnóstico
+                {t('hero_cta_primary')}
               </a>
             </motion.div>
 
@@ -171,7 +172,7 @@ export const Hero = () => {
                 transition-all duration-200
               "
             >
-              Ver portfolio
+              {t('hero_cta_secondary')}
               <span aria-hidden="true">→</span>
             </a>
           </motion.div>
@@ -189,7 +190,7 @@ export const Hero = () => {
           {/* Tag pill */}
           <div className="self-end">
             <span className="font-display font-medium text-xs bg-brand-violet/10 text-brand-violet px-4 py-2 rounded-full">
-              Agencia de Marketing
+              {t('hero_tag')}
             </span>
           </div>
 
@@ -215,14 +216,14 @@ export const Hero = () => {
               <p className="font-display font-black text-3xl text-brand-black">
                 + {config?.marcas || '30'}
               </p>
-              <p className="font-display text-sm text-brand-black/50">marcas</p>
+              <p className="font-display text-sm text-brand-black/50">{t('hero_stat_marcas_label')}</p>
             </div>
             <div className="w-px h-8 bg-brand-gray" />
             <div>
               <p className="font-display font-black text-3xl text-brand-black">
                 + {config?.experiencia || '5'}
               </p>
-              <p className="font-display text-sm text-brand-black/50">años de experiencia</p>
+              <p className="font-display text-sm text-brand-black/50">{t('hero_stat_experiencia_label')}</p>
             </div>
           </div>
 

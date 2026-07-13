@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useConfig } from '../../hooks/useConfig';
+import { useTranslation } from '../../i18n/useTranslation';
 
 /* ── Helpers de animación ────────────────────────────────────────────────── */
 
@@ -15,6 +16,7 @@ const fadeUp = (delay = 0) =>
 
 export const CTADiagnostico = () => {
   const { config = {} } = useConfig()
+  const { t } = useTranslation()
 
   return (
     <section className="relative bg-brand-black min-h-[70vh] flex items-center justify-center py-24 px-6 overflow-hidden text-center">
@@ -36,7 +38,7 @@ export const CTADiagnostico = () => {
         {/* Pill label */}
         <motion.div {...fadeUp(0)}>
           <span className="inline-flex items-center font-display font-medium text-sm text-brand-violet bg-brand-violet/20 rounded-full px-4 py-1">
-            Diagnóstico gratuito
+            {t('cta_pill')}
           </span>
         </motion.div>
 
@@ -46,10 +48,10 @@ export const CTADiagnostico = () => {
           className="mt-6 font-display leading-tight tracking-tight"
         >
           <span className="block font-normal text-4xl md:text-6xl text-brand-white">
-            ¿Tu marca está
+            {t('cta_heading_1')}
           </span>
           <span className="block font-black text-4xl md:text-6xl text-brand-white">
-            hablando claro?
+            {t('cta_heading_2')}
           </span>
         </motion.h2>
 
@@ -58,8 +60,7 @@ export const CTADiagnostico = () => {
           {...fadeUp(0.24)}
           className="font-display text-lg text-white/50 max-w-md mx-auto mt-4"
         >
-          En 5 minutos analizamos tu presencia digital y te damos un diagnóstico
-          honesto. Sin compromiso.
+          {t('cta_paragraph')}
         </motion.p>
 
         {/* CTAs */}
@@ -73,7 +74,7 @@ export const CTADiagnostico = () => {
             whileHover={{ boxShadow: '0 8px 30px rgba(76,76,230,0.5)' }}
             transition={{ duration: 0.2 }}
           >
-            Quiero mi diagnóstico →
+            {t('cta_primary')}
           </motion.a>
           <a
             href="#portfolio"
@@ -84,7 +85,7 @@ export const CTADiagnostico = () => {
               transition-colors duration-200
             "
           >
-            Ver nuestro trabajo
+            {t('cta_secondary')}
           </a>
         </motion.div>
 
@@ -94,8 +95,8 @@ export const CTADiagnostico = () => {
           className="flex items-center mt-16"
         >
           <div className="flex flex-col items-center">
-            <span className="font-display font-black text-2xl text-brand-white leading-none">5 min</span>
-            <span className="font-display text-xs text-white/40 mt-1">Diagnóstico</span>
+            <span className="font-display font-black text-2xl text-brand-white leading-none">{t('cta_stat_diagnostico_value')}</span>
+            <span className="font-display text-xs text-white/40 mt-1">{t('cta_stat_diagnostico_label')}</span>
           </div>
 
           <div className="w-px h-10 bg-white/10 mx-4 md:mx-8" aria-hidden="true" />
@@ -104,14 +105,14 @@ export const CTADiagnostico = () => {
             <span className="font-display font-black text-2xl text-brand-white leading-none">
               + {config?.marcas || '30'}
             </span>
-            <span className="font-display text-xs text-white/40 mt-1">Marcas analizadas</span>
+            <span className="font-display text-xs text-white/40 mt-1">{t('cta_stat_marcas_label')}</span>
           </div>
 
           <div className="w-px h-10 bg-white/10 mx-4 md:mx-8" aria-hidden="true" />
 
           <div className="flex flex-col items-center">
-            <span className="font-display font-black text-2xl text-brand-white leading-none">0 $</span>
-            <span className="font-display text-xs text-white/40 mt-1">Sin costo</span>
+            <span className="font-display font-black text-2xl text-brand-white leading-none">{t('cta_stat_costo_value')}</span>
+            <span className="font-display text-xs text-white/40 mt-1">{t('cta_stat_costo_label')}</span>
           </div>
         </motion.div>
 

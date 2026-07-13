@@ -3,6 +3,7 @@ import { getConfig } from '../lib/api'
 
 export interface SiteConfig {
   whatsapp?: string
+  whatsapp_mensaje?: string
   email?: string
   instagram?: string
   linkedin?: string

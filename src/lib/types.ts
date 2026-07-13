@@ -36,11 +36,29 @@ export interface SiteConfig {
 
 // ─── Lead ─────────────────────────────────────────────────────────────────────
 
+export type ServicioRama = 'web' | 'marketing' | 'ambos';
+
 export interface Lead {
-  nombre:    string;
-  email:     string;
-  telefono?: string;
-  mensaje:   string;
+  nombre:          string;
+  marca:           string;
+  email:           string;
+  telefono?:       string;
+  productos:       string;
+  comoVende:       string;
+  porqueContratar?: string;
+  objetivos?:      string;
+  servicioInteres?: string;
+  materialVisual?: string;
+  inversion:       string;
+  comentarios?:    string;
+
+  servicioRama:      ServicioRama;
+  sitioActual?:      string;
+  identidadVisual?:  string;
+  tipoSitio?:        string;
+  objetivoSitio?:    string;
+  redesActuales?:    string;
+  comoNosConociste:  string;
 }
 
 // ─── API ──────────────────────────────────────────────────────────────────────

@@ -1,103 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { useTranslation } from '../../i18n/useTranslation';
+import type { ServicioTexto } from '../../i18n/translations';
 
 /* ── Tipos ───────────────────────────────────────────────────────────────── */
 
-interface Servicio {
-  id:          string;
-  numero:      string;
-  titulo:      string;
-  descripcion: string;
-  keywords:    readonly string[];
-  link?:       string;
-  variant?:    'balance' | 'scdev';
-}
-
-/* ── Datos ───────────────────────────────────────────────────────────────── */
-
-const SERVICIOS_BALANCE: Servicio[] = [
-  {
-    id:          'contenidos',
-    numero:      '01',
-    titulo:      'Gestión y estrategias de contenidos digitales',
-    descripcion:
-      'No sólo gestionamos perfiles, construimos autoridad. Este servicio integra la ' +
-      'planificación estratégica, la producción y edición de contenido para lograr que ' +
-      'tu marca tenga una identidad clara y un vínculo genuino con su audiencia, ' +
-      'asegurando que tu mensaje sea coherente en cada historia y publicación.',
-    keywords: ['Planificación estratégica', 'Producción de contenido', 'Métricas'],
-  },
-  {
-    id:          'marca',
-    numero:      '02',
-    titulo:      'Arquitectura de marca',
-    descripcion:
-      'Definimos la esencia que hace que tu marca sea única y memorable. Creamos un ' +
-      'sistema visual completo (logo, tipografías, paleta de color y elementos gráficos) ' +
-      'y establecemos el tono y la voz de la marca. Entregamos un manual de identidad ' +
-      'integral que garantiza coherencia en cada punto de contacto.',
-    keywords: ['Identidad visual', 'Manual de marca', 'Logo & tipografía'],
-  },
-  {
-    id:          'consultoria-balance',
-    numero:      '03',
-    titulo:      'Consultorías y mentoría de impacto',
-    descripcion:
-      'Diseñamos una hoja de ruta integral que se adapta a tu estructura actual. A ' +
-      'través de diagnósticos de percepción y sesiones de mentoría, transformamos tu ' +
-      'visión en un sistema de trabajo coherente, humano y autónomo.',
-    keywords: ['Diagnóstico de marca', 'Mentoría', 'Estrategia de crecimiento'],
-  },
-];
-
-const SERVICIOS_SCDEV: Servicio[] = [
-  {
-    id:          'desarrollo-web',
-    numero:      '04',
-    titulo:      'Desarrollo Web',
-    descripcion:
-      'Desde una página de una sola sección hasta sitios corporativos completos. ' +
-      'Desarrollamos tu presencia web con React, animaciones, formularios y deploy ' +
-      'incluido. Ideal para profesionales, comercios y empresas que quieren estar ' +
-      'online de forma profesional.',
-    keywords: ['React + Vite', 'Animaciones', 'SEO incluido', 'Deploy'],
-    variant:  'scdev',
-  },
-  {
-    id:          'automatizacion-ia',
-    numero:      '05',
-    titulo:      'Automatización e IA',
-    descripcion:
-      'Bots de WhatsApp, automatización de procesos internos y flujos que trabajan ' +
-      'solos. Integramos WATI, Apps Script, Python y APIs para que tu negocio funcione ' +
-      'con menos trabajo manual y más eficiencia.',
-    keywords: ['WhatsApp / WATI', 'Apps Script', 'Python', 'Integración email'],
-    variant:  'scdev',
-  },
-  {
-    id:          'mantenimiento',
-    numero:      '06',
-    titulo:      'Mantenimiento',
-    descripcion:
-      'Tu sitio siempre activo, seguro y actualizado. Nos encargamos del hosting, SSL, ' +
-      'actualizaciones de seguridad y cambios de contenido para que vos te enfoques en ' +
-      'tu negocio. Planes mensuales adaptados a cada necesidad.',
-    keywords: ['Hosting + SSL', 'Actualizaciones', 'Soporte WhatsApp', 'Backup'],
-    variant:  'scdev',
-  },
-  {
-    id:          'consultoria-scdev',
-    numero:      '07',
-    titulo:      'Consultoría y Digitalización',
-    descripcion:
-      'Diagnóstico digital para PyMEs. Analizamos tu presencia online, procesos ' +
-      'digitalizables y te entregamos una hoja de ruta concreta de mejoras. Trabajamos ' +
-      'junto con Balance para ofrecerte una solución integral de comunicación y tecnología.',
-    keywords: ['Auditoría digital', 'Hoja de ruta', 'Procesos internos', 'PyMEs'],
-    variant:  'scdev',
-  },
-];
+type Servicio = ServicioTexto;
 
 /* ── Animation variants ──────────────────────────────────────────────────── */
 
@@ -123,7 +32,10 @@ const itemVariants: Variants = {
 /* ── Componente ──────────────────────────────────────────────────────────── */
 
 export const Servicios = () => {
-  const [openId, setOpenId] = useState<string>(SERVICIOS_BALANCE[0].id);
+  const { t, servicios } = useTranslation();
+  const serviciosBalance = servicios.filter(s => s.variant !== 'scdev');
+  const serviciosScdev   = servicios.filter(s => s.variant === 'scdev');
+  const [openId, setOpenId] = useState<string>(serviciosBalance[0].id);
 
   const toggle = (id: string) => {
     setOpenId(prev => (prev === id ? '' : id));
@@ -204,18 +116,18 @@ export const Servicios = () => {
   };
 
   return (
-    <section id="servicios" className="bg-brand-white py-24 px-6 scroll-mt-16 md:scroll-mt-20" aria-label="Nuestros servicios">
+    <section id="servicios" className="bg-brand-white py-24 px-6 scroll-mt-16 md:scroll-mt-20" aria-label={t('services_aria_label')}>
       <div className="max-w-6xl mx-auto">
 
         {/* ── Header ──────────────────────────────────────────────────── */}
         <div className="mb-16">
           <span className="font-display font-medium text-xs text-brand-green tracking-widest uppercase">
-            SERVICIOS
+            {t('services_label')}
           </span>
           <h2 className="font-display font-black text-5xl md:text-6xl text-brand-black leading-tight tracking-tight mt-3">
-            Todo lo que necesitás{' '}
+            {t('services_heading_pre')}{' '}
             <span className="font-script font-bold text-brand-violet">
-              para crecer
+              {t('services_heading_script')}
             </span>
           </h2>
         </div>
@@ -228,18 +140,18 @@ export const Servicios = () => {
           viewport={{ once: true, margin: '-80px' }}
           className="flex flex-col"
         >
-          {SERVICIOS_BALANCE.map(renderItem)}
+          {serviciosBalance.map(renderItem)}
 
           {/* ── Divisor SCdev ─────────────────────────────────────────── */}
           <motion.div variants={itemVariants} className="flex items-center gap-4 my-2">
             <span className="flex-1 h-px bg-brand-green/30" />
             <span className="text-brand-green text-sm font-black tracking-widest uppercase whitespace-nowrap">
-              DESARROLLO WEB
+              {t('services_divider')}
             </span>
             <span className="flex-1 h-px bg-brand-green/30" />
           </motion.div>
 
-          {SERVICIOS_SCDEV.map(renderItem)}
+          {serviciosScdev.map(renderItem)}
         </motion.div>
 
       </div>
